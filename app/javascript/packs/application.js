@@ -11,3 +11,12 @@ import "channels";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+$(document).ready(function () {
+  $("div.cards-cont .room-card").click(function () {
+    $(".room-card").removeClass("active");
+    $(this).addClass("active");
+  });
+});
+
+

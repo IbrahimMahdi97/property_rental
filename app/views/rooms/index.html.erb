@@ -25,20 +25,20 @@
             <div class="room-image">
               <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
             </div>
-            <h6>
+            <h5>
               <%= room.address_line1 %>
-            </h6>
-            <p>
+            </h5>
+            <p class="card-title">
               <%= room.title %>
             </p>
             <div class="container no-marginLR">
               <div class="row">
-                <div class="col-sm-5">
+                <div class="col-sm-5 price-wrap">
                   <p class="p-21">
                     Price: <span>$<%= room.price %>/mo</span>
                   </p>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-7 avail-wrap">
                   <p class="p-22">
                     Availability Date: <span><%= room.available_at %></span>
                   </p>
@@ -48,21 +48,37 @@
             <p>
               <span><%= link_to 'Show', room %></span> |
               <span><%= link_to 'Edit', edit_room_path(room) %></span> |
-              <span><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+              <span><%= link_to 'Delete', room, method: :delete, data: { confirm: 'Are you sure?' } %></span>
             </p>
           </div>
           <% end %>
         </div>
       </div>
     </div>
-    <!-- end col-sm-10 -->
+    <!-- end col-sm-11 -->
     <div class=" col-sm-1">
 
     </div>
-    <!-- end col-sm-2 -->
+    <!-- end col-sm-1 -->
   </div>
 
 </div>
+<div class="map-wrap">
+  <div id="map"></div>
+</div>
+<script>
+  let map;
 
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: {
+        lat: 39.099724,
+        lng: -97.578331
+      },
+      zoom: 8,
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJm1Q2Cu54GTyRoP02uWiCQz1wltLXsKs&callback=initMap&libraries=&v=weekly" async></script>
 
 <br>
