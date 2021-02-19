@@ -21,7 +21,7 @@
       <div class="container no-marginLR">
         <div class="row cards-cont">
           <% @rooms.each do |room| %>
-          <div class="col-lg-3 col-md-5 col-sm-11 room-card">
+          <div class="col-lg-3 col-md-4 col-sm-11 room-card">
             <div class="room-image">
               <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
             </div>
@@ -33,12 +33,12 @@
             </p>
             <div class="container no-marginLR">
               <div class="row">
-                <div class="col-md-5 col-sm-6 col-xs-6 price-wrap">
+                <div class="col-lg-5 col-sm-12 col-10 price-wrap">
                   <p class="p-21">
                     Price: <span>$<%= room.price %>/mo</span>
                   </p>
                 </div>
-                <div class="col-md-7 col-sm-6 col-xs-6 avail-wrap">
+                <div class="col-lg-7 col-sm-12 col-12 avail-wrap">
                   <p class="p-22">
                     Availability Date: <span><%= room.available_at %></span>
                   </p>
