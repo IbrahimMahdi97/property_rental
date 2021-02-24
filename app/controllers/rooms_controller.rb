@@ -4,6 +4,15 @@ class RoomsController < ApplicationController
   # GET /rooms or /rooms.json
   def index
     @rooms = Room.all
+    @hash = Gmaps4rails.build_markers(@rooms) do |room, marker|
+      marker.lat room.latitude
+      marker.lng room.longitude
+      marker.infowindow room.title
+    end
+  end
+
+  def root
+    roo.locations = Room.all
   end
 
   # GET /rooms/1 or /rooms/1.json

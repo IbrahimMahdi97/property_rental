@@ -27,3 +27,11 @@ $(document).ready(function () {
     $(this).addClass("active");
   });
 });
+// $(document).ready(function (e) {
+//   var hheight = $(window).height();
+//   $("#map").css("height", hheight);
+//   $(window).resize(function () {
+//     var hheight = $(window).height();
+//     $("#map").css("height", hheight);
+//   });
+// });

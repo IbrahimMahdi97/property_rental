@@ -56,27 +56,68 @@
       </div>
     </div>
     <!-- end col-sm-11 -->
-    <div class="col-md-1 col-sm-3 col-5">
 
-    </div>
-    <!-- end col-sm-1 -->
   </div>
+
 
 </div>
 <div class="map-wrap">
   <div id="map"></div>
 </div>
+
+<%
+=begin%>
+<% provide :head_tags do %>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    initMap('<%= @rooms.latitude %>', '<%= @rooms.longitude %>')
+  });
+</script>
+<% end %>
+<%
+=end%>
+
 <script>
   let map;
 
   function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: {
+    const myLatLng = {
         lat: 38.990000,
         lng: -95.002331
       },
-      zoom: 11,
-    });
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: myLatLng,
+        zoom: 11,
+      });
+    // new google.maps.Marker({
+    //   position: myLatLng,
+    //   map,
+    //   title: "Hello World!",
+    // });
+    // for (var i = 0; i < roo.locations.length; i++) {
+    //   new google.maps.Marker({
+    //     position: {
+    //       lat: roo.locations[i].latitude,
+    //       lng: roo.locations[i].longitude
+    //     },
+    //     title: roo.locations[i].address_line1,
+    //     map: map
+    //   });
+    // }
+
+    let markers = JSON.parse('<%= raw @hash.to_json%>')
+    for (var i = 0; i < markers.length; i++) {
+      new google.maps.Marker({
+        position: {
+          lat: markers[i].lat,
+          lng: markers[i].lng
+        },
+        title: markers[i].infowindow
+      });
+    }
+
+
+
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJm1Q2Cu54GTyRoP02uWiCQz1wltLXsKs&callback=initMap&libraries=&v=weekly" async></script>
