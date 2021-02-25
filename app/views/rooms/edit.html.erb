@@ -1,6 +1,12 @@
-<h1>Editing Room</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
-<%= render 'form', room: @room %>
+      <h1 style="display: block; margin: 5px auto; width: 100%; text-align: center">Editing Room <%= @room.title %>
+      </h1>
+      <%= link_to 'Show', @room, class:"show-tag" %><%= link_to 'Back', rooms_path, class:"back-tag" %>
 
-<%= link_to 'Show', @room %> |
-<%= link_to 'Back', rooms_path %>
+      <%= render 'form', room: @room %>
+    </div>
+  </div>
+</div>

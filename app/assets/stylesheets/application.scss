@@ -69,7 +69,8 @@ html {
 .cards-cont {
   margin-left: 2px;
 }
-.room-card {
+.room-card,
+.form-cont {
   padding: 8px;
   margin: 4px 12px;
   box-shadow: 0px 6px 9px rgba(44, 40, 40, 0.11);
@@ -136,6 +137,60 @@ html {
 .p-21 span,
 .p-22 span {
   font-weight: 600;
+}
+
+// Edit view
+.show-tag {
+  display: inline-block;
+  float: right;
+  position: relative;
+  left: -5%;
+  z-index: 20;
+}
+
+.back-tag {
+  display: inline-block;
+  float: left;
+  position: relative;
+  left: 7%;
+  z-index: 20;
+}
+
+// form partial
+
+.form-cont .form-body {
+  display: block;
+  margin-left: 9%;
+}
+
+.form-field .field {
+  width: 100%;
+}
+
+.form-field .field label {
+  width: 20%;
+  text-align: justify;
+}
+
+.form-field .field input {
+  width: 50%;
+  text-align: center;
+}
+
+.form-action .actions input {
+  width: 20%;
+  display: block;
+  margin: 0 auto;
+}
+
+.form-action .actions {
+  align-items: center;
+}
+
+.form-image .field .img_preview {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
 }
 
 // Responsive Media
