@@ -139,7 +139,14 @@ html {
   font-weight: 600;
 }
 
-// Edit view
+// Edit, New views
+.view-title {
+  display: block;
+  margin: 5px auto;
+  width: 100%;
+  text-align: center;
+}
+
 .show-tag {
   display: inline-block;
   float: right;
