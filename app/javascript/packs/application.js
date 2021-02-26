@@ -27,6 +27,7 @@ $(document).ready(function () {
     $(this).addClass("active");
   });
 });
+
 // $(document).ready(function (e) {
 //   var hheight = $(window).height();
 //   $("#map").css("height", hheight);
@@ -35,3 +36,10 @@ $(document).ready(function () {
 //     $("#map").css("height", hheight);
 //   });
 // });
+window.initMap = function (...args) {
+  const event = document.createEvent("Events");
+  event.initEvent("google-maps-callback", true, true);
+  event.args = args;
+  window.dispatchEvent(event);
+};
+import "controllers";

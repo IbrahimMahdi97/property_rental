@@ -9,6 +9,11 @@
       </div>
       <div class="col-sm-2">
         <%= link_to 'New Room', new_room_path, class:"add-button" %>
+        <!-- Button trigger modal -->
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          <i class="fas fa-plus-circle"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -60,22 +65,40 @@
   </div>
 
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">New Room</h5>
+        </div>
+        <%
+=begin%>
+        <div id="rooms-modal-body" class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <%= link_to 'Back', rooms_path, class:"back-tag" %>
+                <%= render 'form', room: @room %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%
+=end%>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 <div class="map-wrap">
   <div id="map"></div>
 </div>
-
-<%
-=begin%>
-<% provide :head_tags do %>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    initMap('<%= @rooms.latitude %>', '<%= @rooms.longitude %>')
-  });
-</script>
-<% end %>
-<%
-=end%>
 
 <script>
   let map;
@@ -83,41 +106,25 @@
   function initMap() {
     const myLatLng = {
         lat: 38.990000,
-        lng: -95.002331
+        lng: -180.002331
       },
       map = new google.maps.Map(document.getElementById("map"), {
         center: myLatLng,
-        zoom: 11,
+        zoom: 3,
       });
-    // new google.maps.Marker({
-    //   position: myLatLng,
-    //   map,
-    //   title: "Hello World!",
-    // });
-    // for (var i = 0; i < roo.locations.length; i++) {
-    //   new google.maps.Marker({
-    //     position: {
-    //       lat: roo.locations[i].latitude,
-    //       lng: roo.locations[i].longitude
-    //     },
-    //     title: roo.locations[i].address_line1,
-    //     map: map
-    //   });
-    // }
 
     let markers = JSON.parse('<%= raw @hash.to_json%>')
+
     for (var i = 0; i < markers.length; i++) {
-      new google.maps.Marker({
+      var marker = new google.maps.Marker({
         position: {
-          lat: markers[i].lat,
-          lng: markers[i].lng
+          lat: parseFloat(markers[i].lat),
+          lng: parseFloat(markers[i].lng)
         },
-        title: markers[i].infowindow
+        title: markers[i].infowindow,
+        map: map
       });
     }
-
-
-
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJm1Q2Cu54GTyRoP02uWiCQz1wltLXsKs&callback=initMap&libraries=&v=weekly" async></script>
