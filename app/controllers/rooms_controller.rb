@@ -11,10 +11,6 @@ class RoomsController < ApplicationController
     end
   end
 
-  def root
-    roo.locations = Room.all
-  end
-
   # GET /rooms/1 or /rooms/1.json
   def show
   end
