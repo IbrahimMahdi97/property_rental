@@ -9,117 +9,15 @@
       </div>
       <div class="col-sm-2">
         <%= link_to 'New Room', new_room_path, class:"add-button" %>
+        <!-- Button trigger modal -->
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          <i class="fas fa-plus-circle"></i>
+        </button>
       </div>
     </div>
   </div>
 
 </div>
 <p id="notice"><%= notice %></p>
-<div class="container no-marginLR">
-  <div class="row">
-    <div class="col-md-11 col-sm-9 col-7 rooms-cards">
-      <div class="container no-marginLR">
-        <div class="row cards-cont">
-          <% @rooms.each do |room| %>
-          <div class="col-lg-3 col-md-4 col-sm-11 room-card">
-            <div class="room-image">
-              <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
-            </div>
-            <h5>
-              <%= room.address_line1 %>
-            </h5>
-            <p class="card-title">
-              <%= room.title %>
-            </p>
-            <div class="container no-marginLR">
-              <div class="row">
-                <div class="col-lg-5 col-sm-12 col-10 price-wrap">
-                  <p class="p-21">
-                    Price: <span>$<%= room.price %>/mo</span>
-                  </p>
-                </div>
-                <div class="col-lg-7 col-sm-12 col-12 avail-wrap">
-                  <p class="p-22">
-                    Availability Date: <span><%= room.available_at %></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <p>
-              <span><%= link_to 'Show', room %></span> |
-              <span><%= link_to 'Edit', edit_room_path(room) %></span> |
-              <span><%= link_to 'Delete', room, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-            </p>
-          </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <!-- end col-sm-11 -->
-
-  </div>
-
-
-</div>
-<div class="map-wrap">
-  <div id="map"></div>
-</div>
-
-<%
-=begin%>
-<% provide :head_tags do %>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    initMap('<%= @rooms.latitude %>', '<%= @rooms.longitude %>')
-  });
-</script>
-<% end %>
-<%
-=end%>
-
-<script>
-  let map;
-
-  function initMap() {
-    const myLatLng = {
-        lat: 38.990000,
-        lng: -95.002331
-      },
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: myLatLng,
-        zoom: 11,
-      });
-    // new google.maps.Marker({
-    //   position: myLatLng,
-    //   map,
-    //   title: "Hello World!",
-    // });
-    // for (var i = 0; i < roo.locations.length; i++) {
-    //   new google.maps.Marker({
-    //     position: {
-    //       lat: roo.locations[i].latitude,
-    //       lng: roo.locations[i].longitude
-    //     },
-    //     title: roo.locations[i].address_line1,
-    //     map: map
-    //   });
-    // }
-
-    let markers = JSON.parse('<%= raw @hash.to_json%>')
-    for (var i = 0; i < markers.length; i++) {
-      new google.maps.Marker({
-        position: {
-          lat: markers[i].lat,
-          lng: markers[i].lng
-        },
-        title: markers[i].infowindow
-      });
-    }
-
-
-
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJm1Q2Cu54GTyRoP02uWiCQz1wltLXsKs&callback=initMap&libraries=&v=weekly" async></script>
-
-<br>
+<%= render 'rooms', room: @room %>

@@ -1,89 +1,83 @@
-<div class="container">
+<%= form_with(model: room) do |form| %>
+<% if room.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+  <ul>
+    <% room.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="container form-cont">
   <div class="row">
-    <div class="col-sm-12">
-      <%= form_with(model: room) do |form| %>
-      <% if room.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
-
-        <ul>
-          <% room.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
+    <% if room.image.present?%>
+    <div class="col-sm-12 form-image">
+      <div class="field">
+        <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
       </div>
-      <% end %>
-      <div class="container form-cont">
-        <div class="row">
-          <% if room.image.present?%>
-          <div class="col-sm-12 form-image">
-            <div class="field">
-              <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
-            </div>
+    </div>
+    <% end %>
+    <div class="form-body">
+      <div class="row">
+        <div class="col-sm-12 form-field">
+          <div class="field">
+            <%= form.label :title %>
+            <%= form.text_field :title %>
           </div>
-          <% end %>
-          <div class="form-body">
-            <div class="row">
-              <div class="col-sm-12 form-field">
-                <div class="field">
-                  <%= form.label :title %>
-                  <%= form.text_field :title %>
-                </div>
-              </div>
-              <div class="col-sm-12 form-field">
-                <div class="field">
-                  <%= form.label :address_line1 %>
-                  <%= form.text_field :address_line1 %>
-                </div>
-              </div>
-              <div class="col-sm-6 form-field">
-                <div class="field">
-                  <%= form.label :longitude %>
-                  <%= form.number_field :longitude, step: :any %>
-                </div>
-              </div>
-              <div class="col-sm-6 form-field">
-                <div class="field">
-                  <%= form.label :latitude %>
-                  <%= form.number_field :latitude, step: :any %>
-                </div>
-              </div>
-              <div class="col-sm-6 form-field">
-                <div class="field">
-                  <%= form.label :price %>
-                  <%= form.number_field :price, step: :any %>
-                </div>
-              </div>
-              <div class="col-sm-6 form-field">
-                <div class="field">
-                  <%= form.label :available_at %>
-                  <%= form.date_field :available_at %>
-                </div>
-              </div>
-              <div class="col-sm-12 form-field">
-                <div class="field">
-                  <%= form.label :image %>
-                  <%= form.file_field :image %>
-                </div>
-              </div>
-              <div class="col-sm-12 form-field">
-                <div class="field">
-                  <%= form.label :description %>
-                  <%= form.text_field :description %>
-                </div>
-              </div>
-              <div class="col-sm-12 form-action">
-                <div class="actions">
-                  <%= form.submit %>
-                </div>
-              </div>
-            </div>
-
+        </div>
+        <div class="col-sm-12 form-field">
+          <div class="field">
+            <%= form.label :address_line1 %>
+            <%= form.text_field :address_line1 %>
           </div>
-
+        </div>
+        <div class="col-sm-6 form-field">
+          <div class="field">
+            <%= form.label :longitude %>
+            <%= form.number_field :longitude, step: :any %>
+          </div>
+        </div>
+        <div class="col-sm-6 form-field">
+          <div class="field">
+            <%= form.label :latitude %>
+            <%= form.number_field :latitude, step: :any %>
+          </div>
+        </div>
+        <div class="col-sm-6 form-field">
+          <div class="field">
+            <%= form.label :price %>
+            <%= form.number_field :price, step: :any %>
+          </div>
+        </div>
+        <div class="col-sm-6 form-field">
+          <div class="field">
+            <%= form.label :available_at %>
+            <%= form.date_field :available_at %>
+          </div>
+        </div>
+        <div class="col-sm-12 form-field">
+          <div class="field">
+            <%= form.label :image %>
+            <%= form.file_field :image %>
+          </div>
+        </div>
+        <div class="col-sm-12 form-field">
+          <div class="field">
+            <%= form.label :description %>
+            <%= form.text_field :description %>
+          </div>
+        </div>
+        <div class="col-sm-12 form-action">
+          <div class="actions">
+            <%= form.submit %>
+          </div>
         </div>
       </div>
-      <% end %>
+
     </div>
+
   </div>
 </div>
+<% end %>
