@@ -99,11 +99,13 @@
           lat: parseFloat(markers[i].lat),
           lng: parseFloat(markers[i].lng)
         },
-        title: markers[i].infowindow,
+        // title: markers[i].infowindow,
+        title: "Hello World!",
         map: map
       });
     }
     rooms = JSON.parse('<%= raw @rooms.to_json %>');
+
 
     function toggleRoom(r) {
       room_id = parseInt(r.children[0].value.slice(-1))
@@ -111,63 +113,28 @@
       room_obj = {
         id: my_room.id,
         latitude: parseFloat(my_room.latitude),
-        longitude: parseFloat(my_room.longitude) - 0.666,
+        longitude: parseFloat(my_room.longitude) - 0.019,
         title: my_room.address_line1
       }
       map.setCenter({
         lat: room_obj.latitude,
         lng: room_obj.longitude
       });
-      map.setZoom(10);
+      map.setZoom(15);
     }
     return {
       toggleRoom
     }
+    marker.addListener(toggleRoom, () => {
+      map.setZoom(8);
+      map.setCenter({
+        lat: room_obj.latitude,
+        lng: room_obj.longitude
+
+      });
+    });
 
   }
-
-  // let room_obj = {};
-
-
-
-
-  // function myFunction(room) {
-  //   alert("Room id is: " + room.id);
-  // }
-
-  // $("div.room-card").click(function(r) {
-  //   r.preventDefault();
-  //   let rooms = JSON.parse('<%= raw @rooms.to_json %>');
-  //   let room_id = parseInt($(this).find('input').attr('value').slice(-1));
-  //   let my_room = rooms.find(room => room.id === room_id)
-  //   console.log(my_room.latitude)
-
-  //   var room_obj = {
-  //     id: my_room.id,
-  //     latitude: parseFloat(my_room.latitude),
-  //     longitude: parseFloat(my_room.longitude),
-  //     title: my_room.address_line1
-  //   }
-
-  //   map = new google.maps.Map(document.getElementById("map"), {
-  //     center: {
-  //       lat: room_obj.latitude,
-  //       lng: room_obj.longitude - 0.066
-  //     },
-  //     zoom: 13
-  //   });
-  //   var marker = new google.maps.Marker({
-  //     position: {
-  //       lat: room_obj.latitude,
-  //       lng: room_obj.longitude
-  //     },
-  //     title: room_obj.title,
-  //     map: map
-  //   });
-
-
-  //   return room_obj;
-  // });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJm1Q2Cu54GTyRoP02uWiCQz1wltLXsKs&callback=initMap&libraries=&v=weekly" async></script>
 

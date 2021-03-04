@@ -3,13 +3,6 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-// require("@rails/ujs").start();
-// require("turbolinks").start();
-// require("@rails/activestorage").start();
-// require("channels");
-
-// require("jquery");
-
 import "bootstrap";
 import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
@@ -28,14 +21,6 @@ $(document).ready(function () {
   });
 });
 
-// $(document).ready(function (e) {
-//   var hheight = $(window).height();
-//   $("#map").css("height", hheight);
-//   $(window).resize(function () {
-//     var hheight = $(window).height();
-//     $("#map").css("height", hheight);
-//   });
-// });
 window.initMap = function (...args) {
   const event = document.createEvent("Events");
   event.initEvent("google-maps-callback", true, true);
