@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@rooms) do |room, marker|
       marker.lat room.latitude
       marker.lng room.longitude
-      marker.infowindow room.title
+      marker.infowindow room.address_line1
     end
   end
 

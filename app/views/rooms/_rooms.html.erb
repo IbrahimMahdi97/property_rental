@@ -4,7 +4,7 @@
       <div class="container no-marginLR">
         <div class="row cards-cont">
           <% @rooms.each do |room| %>
-          <div onclick="initMap().toggleRoom(this)" class="col-lg-3 col-md-4 col-sm-11 room-card">
+          <div onclick="toggleRoom(this)" class="col-lg-3 col-md-4 col-sm-11 room-card">
             <%= hidden_field_tag :id, value: room.id %>
             <div class="room-image">
               <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
@@ -83,56 +83,59 @@
 
   function initMap() {
     const myLatLng = {
-        lat: 38.990000,
-        lng: -180.002331
-      },
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: myLatLng,
-        zoom: 3,
-      });
+      lat: 38.990000,
+      lng: -180.002331
+    }
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: myLatLng,
+      zoom: 3,
+    });
 
     let markers = JSON.parse('<%= raw @hash.to_json%>')
-
+    bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < markers.length; i++) {
+
+
       var marker = new google.maps.Marker({
         position: {
           lat: parseFloat(markers[i].lat),
           lng: parseFloat(markers[i].lng)
         },
-        // title: markers[i].infowindow,
-        title: "Hello World!",
+        title: markers[i].infowindow,
         map: map
       });
     }
-    rooms = JSON.parse('<%= raw @rooms.to_json %>');
 
-
-    function toggleRoom(r) {
-      room_id = parseInt(r.children[0].value.slice(-1))
-      my_room = rooms.find(room => room.id === room_id)
-      room_obj = {
-        id: my_room.id,
-        latitude: parseFloat(my_room.latitude),
-        longitude: parseFloat(my_room.longitude) - 0.019,
-        title: my_room.address_line1
-      }
-      map.setCenter({
-        lat: room_obj.latitude,
-        lng: room_obj.longitude
-      });
-      map.setZoom(15);
-    }
-    return {
-      toggleRoom
-    }
-    marker.addListener(toggleRoom, () => {
-      map.setZoom(8);
-      map.setCenter({
-        lat: room_obj.latitude,
-        lng: room_obj.longitude
-
-      });
+    marker.addListener("click", () => {
+      infowindow.open(map, marker);
     });
+
+
+  }
+  rooms = JSON.parse('<%= raw @rooms.to_json %>');
+
+  function toggleRoom(r) {
+    console.log(map);
+
+    room_id = parseInt(r.children[0].value.slice(-1))
+    my_room = rooms.find(room => room.id === room_id)
+    room_obj = {
+      id: my_room.id,
+      latitude: parseFloat(my_room.latitude),
+      longitude: parseFloat(my_room.longitude) - 0.020,
+      title: my_room.address_line1
+    }
+
+    var centerLatLng = new google.maps.LatLng({
+      lat: room_obj.latitude,
+      lng: room_obj.longitude
+    });
+    map.setCenter({
+      lat: room_obj.latitude,
+      lng: room_obj.longitude
+    });
+    map.setZoom(15);
+
 
   }
 </script>
