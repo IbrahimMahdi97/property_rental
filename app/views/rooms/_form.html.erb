@@ -18,6 +18,12 @@
         <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
       </div>
     </div>
+    <% else room.image_url.present? %>
+    <div class="col-sm-12 form-image">
+      <div class="field">
+        <%= image_tag(room.image_url, alt: 'Property Image', class:"img_preview") %>
+      </div>
+    </div>
     <% end %>
     <div class="form-body">
       <div class="row">
@@ -57,10 +63,17 @@
             <%= form.date_field :available_at %>
           </div>
         </div>
-        <div class="col-sm-12 form-field">
+        <div class="col-sm-6 form-field">
           <div class="field">
             <%= form.label :image %>
-            <%= form.file_field :image %>
+            <%= form.file_field :images %>
+          </div>
+        </div>
+        <span>OR</span>
+        <div class="col-sm-5 form-field">
+          <div class="field">
+            <%= form.label :image_url %>
+            <%= form.text_field :image_url %>
           </div>
         </div>
         <div class="col-sm-12 form-field">
