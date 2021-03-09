@@ -7,14 +7,19 @@
           <div onclick="toggleRoom(this)" class="col-lg-3 col-md-4 col-sm-11 room-card">
             <%= hidden_field_tag :id, value: room.id %>
             <div class="room-image">
+              <%
+=begin%>
               <% if room.image.present? %>
               <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
               <% else %>
               <%= image_tag(room.image_url, alt: 'Property Image', class:"img_preview") %>
               <% end %>
+              <%
+=end%>
+              <%= image_pat(room) %>
             </div>
             <h5>
-              <%= room.address_line1 %>
+              <%= room.address_line1.titleize %>
             </h5>
             <p class="card-title">
               <%= room.title %>
@@ -23,7 +28,7 @@
               <div class="row">
                 <div class="col-lg-5 col-sm-12 col-10 price-wrap">
                   <p class="p-21">
-                    Price: <span>$<%= room.price %>/mo</span>
+                    Price: <span><%= number_to_currency room.price %>/mo</span>
                   </p>
                 </div>
                 <div class="col-lg-7 col-sm-12 col-12 avail-wrap">

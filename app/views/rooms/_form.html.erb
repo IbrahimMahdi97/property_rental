@@ -12,7 +12,9 @@
 <% end %>
 <div class="container form-cont">
   <div class="row">
-    <% if room.image.present?%>
+    <%
+=begin%>
+    <% if room.image.present? || room.image_url.present? %>
     <div class="col-sm-12 form-image">
       <div class="field">
         <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
@@ -24,7 +26,15 @@
         <%= image_tag(room.image_url, alt: 'Property Image', class:"img_preview") %>
       </div>
     </div>
+
     <% end %>
+    <%
+=end%>
+    <div class="col-sm-12 form-image">
+      <div class="field">
+        <%= image_pat(room) %>
+      </div>
+    </div>
     <div class="form-body">
       <div class="row">
         <div class="col-sm-12 form-field">
