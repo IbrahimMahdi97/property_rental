@@ -7,15 +7,6 @@
           <div onclick="toggleRoom(this)" class="col-lg-3 col-md-4 col-sm-11 room-card">
             <%= hidden_field_tag :id, value: room.id %>
             <div class="room-image">
-              <%
-=begin%>
-              <% if room.image.present? %>
-              <%= image_tag(room.image, alt: 'Property Image', class:"img_preview") %>
-              <% else %>
-              <%= image_tag(room.image_url, alt: 'Property Image', class:"img_preview") %>
-              <% end %>
-              <%
-=end%>
               <%= image_pat(room) %>
             </div>
             <h5>
