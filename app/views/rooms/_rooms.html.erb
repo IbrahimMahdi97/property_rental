@@ -6,11 +6,13 @@
           <% @rooms.each do |room| %>
           <div onclick="toggleRoom(this)" class="col-lg-3 col-md-4 col-sm-11 room-card">
             <%= hidden_field_tag :id, value: room.id %>
+            <%= hidden_field_tag room.id, "data-id" => 'roomID' %>
+
             <div class="room-image">
               <%= image_pat(room) %>
             </div>
             <h5>
-              <%= room.address_line1.titleize %>
+              <%= truncate(room.address_line1.titleize) %>
             </h5>
             <p class="card-title">
               <%= room.title %>
@@ -115,10 +117,12 @@
   rooms = JSON.parse('<%= raw @rooms.to_json %>');
 
   function toggleRoom(r) {
-    console.log(map);
+
+    rId = parseInt(r.children[1].name);
 
     room_id = parseInt(r.children[0].value.slice(-1))
-    my_room = rooms.find(room => room.id === room_id)
+
+    my_room = rooms.find(room => room.id === rId);
     room_obj = {
       id: my_room.id,
       latitude: parseFloat(my_room.latitude),
