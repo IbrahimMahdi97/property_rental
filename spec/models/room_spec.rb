@@ -1,7 +1,8 @@
 require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Room, type: :model do
-  features "Add new Room" do
+  feature "Add new Room" do
     it "has an address" do
       room = Room.new(
         title: "Bedroom 1A",
