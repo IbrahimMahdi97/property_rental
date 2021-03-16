@@ -16,13 +16,17 @@ RSpec.describe "/rooms", type: :request do
   
   # Room. As you add validations to Room, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) do {
+    title: 'Bedroom 3A',
+    address_line1: 'NY',
   }
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) do {
+    title: "",
+    address_line1: "",
   }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -89,9 +93,9 @@ RSpec.describe "/rooms", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      def new_attributes 
+        { :title => "Bedroom 7S", :address_line1 => "5A"}
+      end 
 
       it "updates the requested room" do
         room = Room.create! valid_attributes
