@@ -71,7 +71,7 @@ RSpec.describe "/rooms", type: :request do
 
       it "redirects to the created room" do
         post rooms_url, params: { room: valid_attributes }
-        expect(response).to redirect_to(room_url(Room.last))
+        expect(response).to redirect_to(rooms_url)
       end
 
       
@@ -86,7 +86,7 @@ RSpec.describe "/rooms", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post rooms_url, params: { room: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to_not be_successful
       end
     end
   end
@@ -116,7 +116,7 @@ RSpec.describe "/rooms", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         room = Room.create! valid_attributes
         patch room_url(room), params: { room: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to_not be_successful
       end
     end
   end
