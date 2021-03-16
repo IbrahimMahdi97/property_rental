@@ -101,7 +101,7 @@ RSpec.describe "/rooms", type: :request do
         room = Room.create! valid_attributes
         patch room_url(room), params: { room: new_attributes }
         room.reload
-        skip("Add assertions for updated state")
+        expect(controller.notice).to eq("Room was successfully updated.")
       end
 
       it "redirects to the room" do
